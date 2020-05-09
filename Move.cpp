@@ -63,6 +63,6 @@ X::X( const char* s) throw (std::bad_alloc):
 
 X::~X()
 {
-	std::cout << "destroying :" << std::endl;
+	std::cout << "destroying" << std::endl;
 	delete[] _head;
 }
