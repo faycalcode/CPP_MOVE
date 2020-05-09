@@ -6,11 +6,7 @@ int main() {
 	X a;
 	{
 	
-		X* ptr = new X("test");
-
-		a = *ptr;
-
-		delete ptr;
+		a = std::move(a);
 
 	}
 	

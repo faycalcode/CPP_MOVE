@@ -31,20 +31,24 @@ X::X(X&& rvalue) noexcept:
 
 X& X::operator=(const X& other) throw (std::bad_alloc)
 {
-	delete[] _head;
-	_size = other._size;
-	_head = new char[other._size];
-	std::memcpy(_head, other._head, _size);
+	if (this != &other) {
+		delete[] _head;
+		_size = other._size;
+		_head = new char[other._size];
+		std::memcpy(_head, other._head, _size);
+	}
 	std::cout << "operator=&" << std::endl;
 	return *this;
 }
 
 X& X::operator=(X&& rvalue) noexcept
 {
-	delete[] _head;
-	_size = std::move(rvalue._size);
-	_head = std::move(rvalue._head);
-	rvalue._head = nullptr;
+	if (this != &rvalue) {
+		delete[] _head;
+		_size = std::move(rvalue._size);
+		_head = std::move(rvalue._head);
+		rvalue._head = nullptr;
+	}
 	std::cout << "operator=&&" << std::endl;
 	return *this;
 }
